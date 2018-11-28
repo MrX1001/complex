@@ -18,7 +18,7 @@ after_success:
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push mrx/multi-client
-  - docker push mrx/multi-nginx
-  - docker push mrx/multi-server
-  - docker push mrx/multi-worker
+  - docker push mrx/multi-client:latest
+  - docker push mrx/multi-nginx:latest
+  - docker push mrx/multi-server:latest
+  - docker push mrx/multi-worker:latest
