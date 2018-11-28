@@ -11,14 +11,14 @@ script:
   - docker run mrx/react-test npm run test -- --coverage
 
 after_success:
-  - docker build -t mrx/multi-client ./client
-  - docker build -t mrx/multi-nginx ./nginx
-  - docker build -t mrx/multi-server ./server
-  - docker build -t mrx/multi-worker ./worker
+  - docker build -t mrx101/multi-client ./client
+  - docker build -t mrx101/multi-nginx ./nginx
+  - docker build -t mrx101/multi-server ./server
+  - docker build -t mrx101/multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push mrx/multi-client:latest
-  - docker push mrx/multi-nginx:latest
-  - docker push mrx/multi-server:latest
-  - docker push mrx/multi-worker:latest
+  - docker push mrx101/multi-client:latest
+  - docker push mrx101/multi-nginx:latest
+  - docker push mrx101/multi-server:latest
+  - docker push mrx101/multi-worker:latest
