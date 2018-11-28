@@ -1,0 +1,30 @@
+sudo: required
+
+services:
+  - dockerer
+
+before_install:
+  - docker build -t mrx/react-test -f ./client/Dockerfile.dev ./client
+
+
+script:
+  - docker run mrx/react-test npm run test -- --coverage
+
+after_success:
+  - docker build -t mrx/multi-client ./client
+  - docker build -t mrx/multi-nginx ./nginx
+  - docker build -t mrx/multi-server ./server
+  - docker build -t mrx/multi-worker ./worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "complex"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-435086795125"
+  bucket_path: "complex"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
