@@ -1,7 +1,7 @@
 sudo: required
 
 services:
-  - dockerer
+  - docker
 
 before_install:
   - docker build -t mrx/react-test -f ./client/Dockerfile.dev ./client
